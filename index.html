@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -21,280 +20,249 @@
     --accent-amber: #ff8f00;
   }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep-bg);
+    color: var(--text-main);
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
 
-body {
-background: var(–deep-bg);
-color: var(–text-main);
-font-family: ‘Raleway’, sans-serif;
-overflow-x: hidden;
-min-height: 100vh;
-}
+  #particles {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+  }
 
-/* ── PARTICLES ── */
-#particles {
-position: fixed; inset: 0;
-pointer-events: none; z-index: 0;
-overflow: hidden;
-}
-.particle {
-position: absolute;
-border-radius: 50%;
-background: radial-gradient(circle, var(–gold-light), transparent 70%);
-animation: floatUp linear infinite;
-opacity: 0;
-}
-@keyframes floatUp {
-0%   { transform: translateY(110vh) scale(0); opacity: 0; }
-10%  { opacity: 0.4; }
-90%  { opacity: 0.15; }
-100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-}
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none; opacity: 0.6;
+  }
 
-/* ── NOISE TEXTURE OVERLAY ── */
-body::before {
-content: ‘’;
-position: fixed; inset: 0; z-index: 1;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 200 200’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.85’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.04’/%3E%3C/svg%3E”);
-background-size: 200px 200px;
-pointer-events: none; opacity: 0.6;
-}
+  header {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background: radial-gradient(ellipse at 50% 0%, #2a1a0088 0%, transparent 70%);
+    animation: fadeDown .9s ease both;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-/* ── HEADER ── */
-header {
-position: relative; z-index: 10;
-text-align: center;
-padding: 80px 20px 60px;
-background: radial-gradient(ellipse at 50% 0%, #2a1a0088 0%, transparent 70%);
-animation: fadeDown .9s ease both;
-}
-@keyframes fadeDown {
-from { opacity: 0; transform: translateY(-30px); }
-to   { opacity: 1; transform: translateY(0); }
-}
+  .header-ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-bottom: 28px;
+  }
+  .ornament-line {
+    height: 1px; width: 80px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .ornament-line.right { background: linear-gradient(90deg, var(--gold), transparent); }
+  .ornament-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold); transform: rotate(45deg);
+    box-shadow: 0 0 12px var(--gold);
+  }
 
-.header-ornament {
-display: flex; align-items: center; justify-content: center;
-gap: 16px; margin-bottom: 28px;
-}
-.ornament-line {
-height: 1px; width: 80px;
-background: linear-gradient(90deg, transparent, var(–gold));
-}
-.ornament-line.right { background: linear-gradient(90deg, var(–gold), transparent); }
-.ornament-diamond {
-width: 8px; height: 8px;
-background: var(–gold); transform: rotate(45deg);
-box-shadow: 0 0 12px var(–gold);
-}
+  .restaurant-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-light) 40%, var(--gold) 60%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 3s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 24px rgba(201,168,76,0.4));
+    line-height: 1.1;
+  }
+  @keyframes glow {
+    from { filter: drop-shadow(0 0 12px rgba(201,168,76,0.3)); }
+    to   { filter: drop-shadow(0 0 36px rgba(240,208,128,0.7)); }
+  }
 
-.restaurant-name {
-font-family: ‘Cinzel Decorative’, serif;
-font-size: clamp(2.4rem, 7vw, 5rem);
-font-weight: 900;
-letter-spacing: 0.08em;
-background: linear-gradient(135deg, var(–gold-dark) 0%, var(–gold-light) 40%, var(–gold) 60%, var(–gold-dark) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-animation: glow 3s ease-in-out infinite alternate;
-filter: drop-shadow(0 0 24px rgba(201,168,76,0.4));
-line-height: 1.1;
-}
-@keyframes glow {
-from { filter: drop-shadow(0 0 12px rgba(201,168,76,0.3)); }
-to   { filter: drop-shadow(0 0 36px rgba(240,208,128,0.7)); }
-}
+  .tagline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    color: var(--text-muted);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
 
-.tagline {
-font-family: ‘Cinzel’, serif;
-font-size: clamp(0.7rem, 1.8vw, 1rem);
-color: var(–text-muted);
-letter-spacing: 0.35em;
-text-transform: uppercase;
-margin-top: 14px;
-}
+  main {
+    position: relative; z-index: 10;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
 
-/* ── MAIN CONTENT ── */
-main {
-position: relative; z-index: 10;
-max-width: 860px;
-margin: 0 auto;
-padding: 0 20px 80px;
-}
+  .menu-section {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .menu-section.visible { opacity: 1; transform: translateY(0); }
 
-/* ── SECTION ── */
-.menu-section {
-margin-bottom: 56px;
-opacity: 0;
-transform: translateY(40px);
-transition: opacity .7s ease, transform .7s ease;
-}
-.menu-section.visible {
-opacity: 1; transform: translateY(0);
-}
+  .section-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--card-border); }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border: 1px solid;
+  }
+  .section-title.veg    { color: var(--veg-green);  border-color: var(--veg-green);  box-shadow: 0 0 16px rgba(76,175,80,0.2); }
+  .section-title.nonveg { color: var(--nonveg-red); border-color: var(--nonveg-red); box-shadow: 0 0 16px rgba(229,57,53,0.2); }
+  .section-title.pulav  { color: var(--gold);        border-color: var(--gold);       box-shadow: 0 0 16px rgba(201,168,76,0.2); }
 
-.section-header {
-display: flex; align-items: center; gap: 16px;
-margin-bottom: 28px;
-}
-.section-line { flex: 1; height: 1px; background: var(–card-border); }
-.section-title {
-font-family: ‘Cinzel’, serif;
-font-size: clamp(1.1rem, 3vw, 1.5rem);
-font-weight: 700;
-letter-spacing: 0.15em;
-text-transform: uppercase;
-padding: 6px 20px;
-border: 1px solid;
-position: relative;
-}
-.section-title.veg { color: var(–veg-green); border-color: var(–veg-green); box-shadow: 0 0 16px rgba(76,175,80,0.2); }
-.section-title.nonveg { color: var(–nonveg-red); border-color: var(–nonveg-red); box-shadow: 0 0 16px rgba(229,57,53,0.2); }
-.section-title.pulav { color: var(–gold); border-color: var(–gold); box-shadow: 0 0 16px rgba(201,168,76,0.2); }
+  .menu-items { display: flex; flex-direction: column; gap: 4px; }
 
-/* ── MENU ITEMS ── */
-.menu-items { display: flex; flex-direction: column; gap: 4px; }
+  .menu-item {
+    display: flex; align-items: center;
+    padding: 14px 20px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity .5s ease, transform .5s ease, background .25s, border-color .25s;
+  }
+  .menu-item.visible { opacity: 1; transform: translateX(0); }
+  .menu-item:hover {
+    background: #1a1508;
+    border-color: var(--gold-dark);
+    transform: translateX(4px) !important;
+  }
+  .menu-item::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: transparent;
+    transition: background .25s;
+  }
+  .menu-item:hover::before { background: var(--gold); }
 
-.menu-item {
-display: flex; align-items: center;
-padding: 14px 20px;
-background: var(–card-bg);
-border: 1px solid var(–card-border);
-border-radius: 4px;
-cursor: default;
-transition: background .25s, border-color .25s, transform .25s;
-position: relative;
-overflow: hidden;
-opacity: 0;
-transform: translateX(-20px);
-transition: opacity .5s ease, transform .5s ease, background .25s, border-color .25s;
-}
-.menu-item.visible { opacity: 1; transform: translateX(0); }
-.menu-item:hover {
-background: #1a1508;
-border-color: var(–gold-dark);
-transform: translateX(4px) !important;
-}
-.menu-item::before {
-content: ‘’;
-position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
-background: transparent;
-transition: background .25s;
-}
-.menu-item:hover::before { background: var(–gold); }
+  .food-dot {
+    width: 14px; height: 14px; flex-shrink: 0;
+    border-radius: 2px; margin-right: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .food-dot::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: block;
+  }
+  .food-dot.veg    { border: 1.5px solid var(--veg-green); }
+  .food-dot.veg::after   { background: var(--veg-green); }
+  .food-dot.nonveg { border: 1.5px solid var(--nonveg-red); }
+  .food-dot.nonveg::after{ background: var(--nonveg-red); }
 
-/* food type dot */
-.food-dot {
-width: 14px; height: 14px; flex-shrink: 0;
-border-radius: 2px; margin-right: 14px;
-display: flex; align-items: center; justify-content: center;
-}
-.food-dot::after {
-content: ‘’;
-width: 8px; height: 8px;
-border-radius: 50%;
-display: block;
-}
-.food-dot.veg   { border: 1.5px solid var(–veg-green); }
-.food-dot.veg::after  { background: var(–veg-green); }
-.food-dot.nonveg { border: 1.5px solid var(–nonveg-red); }
-.food-dot.nonveg::after { background: var(–nonveg-red); }
+  .item-name {
+    flex: 1;
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+    font-weight: 500;
+    color: var(--text-main);
+    letter-spacing: 0.02em;
+  }
 
-.item-name {
-flex: 1;
-font-family: ‘Raleway’, sans-serif;
-font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-font-weight: 500;
-color: var(–text-main);
-letter-spacing: 0.02em;
-}
+  .badges { display: flex; gap: 6px; margin-right: 12px; }
+  .badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 2px 7px; border-radius: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-special {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #0a0805;
+    box-shadow: 0 0 8px rgba(201,168,76,0.4);
+  }
+  .badge-family {
+    background: transparent;
+    border: 1px solid var(--accent-amber);
+    color: var(--accent-amber);
+  }
 
-.badges { display: flex; gap: 6px; margin-right: 12px; }
-.badge {
-font-family: ‘Cinzel’, serif;
-font-size: 0.6rem; font-weight: 700;
-letter-spacing: 0.06em;
-padding: 2px 7px; border-radius: 2px;
-text-transform: uppercase;
-white-space: nowrap;
-}
-.badge-special {
-background: linear-gradient(135deg, var(–gold-dark), var(–gold));
-color: #0a0805;
-box-shadow: 0 0 8px rgba(201,168,76,0.4);
-}
-.badge-family {
-background: transparent;
-border: 1px solid var(–accent-amber);
-color: var(–accent-amber);
-}
+  .item-price {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .item-price::before { content: '\20B9 '; font-size: 0.75em; opacity: 0.7; }
 
-.item-price {
-font-family: ‘Cinzel’, serif;
-font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-font-weight: 600;
-color: var(–gold);
-letter-spacing: 0.04em;
-white-space: nowrap;
-}
-.item-price::before { content: ’₹ ’; font-size: 0.75em; opacity: 0.7; }
+  .section-divider {
+    text-align: center;
+    margin: 20px 0 48px;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark) 30%, var(--gold-dark) 70%, transparent);
+  }
+  .section-divider span {
+    position: relative;
+    background: var(--deep-bg);
+    padding: 0 16px;
+    color: var(--gold-dark);
+    font-size: 1.1rem;
+  }
 
-/* ── DIVIDER ── */
-.section-divider {
-text-align: center;
-margin: 20px 0 48px;
-position: relative;
-}
-.section-divider::before {
-content: ‘’;
-position: absolute; top: 50%; left: 0; right: 0; height: 1px;
-background: linear-gradient(90deg, transparent, var(–gold-dark) 30%, var(–gold-dark) 70%, transparent);
-}
-.section-divider span {
-position: relative;
-background: var(–deep-bg);
-padding: 0 16px;
-color: var(–gold-dark);
-font-size: 1.1rem;
-}
+  .footer-note {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 32px 20px 48px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--card-border);
+  }
+  .footer-note span { color: var(--gold-dark); }
 
-/* ── FOOTER NOTE ── */
-.footer-note {
-position: relative; z-index: 10;
-text-align: center;
-padding: 32px 20px 48px;
-font-size: 0.78rem;
-color: var(–text-muted);
-letter-spacing: 0.1em;
-text-transform: uppercase;
-border-top: 1px solid var(–card-border);
-}
-.footer-note span { color: var(–gold-dark); }
+  #scrollTop {
+    position: fixed; bottom: 28px; right: 28px; z-index: 100;
+    width: 44px; height: 44px;
+    background: var(--card-bg); border: 1px solid var(--gold-dark);
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1.2rem;
+    opacity: 0; transition: opacity .3s, background .2s;
+    box-shadow: 0 0 16px rgba(201,168,76,0.15);
+  }
+  #scrollTop.show { opacity: 1; }
+  #scrollTop:hover { background: #1c160a; }
 
-/* ── SCROLL TO TOP ── */
-#scrollTop {
-position: fixed; bottom: 28px; right: 28px; z-index: 100;
-width: 44px; height: 44px;
-background: var(–card-bg); border: 1px solid var(–gold-dark);
-border-radius: 50%; cursor: pointer;
-display: flex; align-items: center; justify-content: center;
-color: var(–gold); font-size: 1.2rem;
-opacity: 0; transition: opacity .3s, background .2s;
-box-shadow: 0 0 16px rgba(201,168,76,0.15);
-}
-#scrollTop.show { opacity: 1; }
-#scrollTop:hover { background: #1c160a; }
-
-@media (max-width: 520px) {
-.menu-item { padding: 12px 14px; }
-.item-name { font-size: 0.88rem; }
-.section-title { font-size: 1rem; padding: 5px 14px; }
-}
+  @media (max-width: 520px) {
+    .menu-item { padding: 12px 14px; }
+    .item-name { font-size: 0.88rem; }
+    .section-title { font-size: 1rem; padding: 5px 14px; }
+  }
 </style>
-
 </head>
 <body>
 
@@ -307,12 +275,10 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
     <div class="ornament-line right"></div>
   </div>
   <h1 class="restaurant-name">Biryani's</h1>
-  <p class="tagline">Authentic Flavours &nbsp;·&nbsp; Royal Recipes &nbsp;·&nbsp; Premium Quality</p>
+  <p class="tagline">Authentic Flavours &nbsp;&middot;&nbsp; Royal Recipes &nbsp;&middot;&nbsp; Premium Quality</p>
 </header>
 
 <main>
-
-  <!-- VEG SECTION -->
 
   <div class="menu-section" id="sec-veg">
     <div class="section-header">
@@ -330,9 +296,7 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
     </div>
   </div>
 
-  <div class="section-divider"><span>✦</span></div>
-
-  <!-- NON-VEG SECTION -->
+  <div class="section-divider"><span>&#10022;</span></div>
 
   <div class="menu-section" id="sec-nonveg">
     <div class="section-header">
@@ -352,9 +316,7 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
     </div>
   </div>
 
-  <div class="section-divider"><span>✦</span></div>
-
-  <!-- PULAV SECTION -->
+  <div class="section-divider"><span>&#10022;</span></div>
 
   <div class="menu-section" id="sec-pulav">
     <div class="section-header">
@@ -374,13 +336,12 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
 </main>
 
 <footer class="footer-note">
-  <span>✦</span>&nbsp; All prices exclusive of taxes &nbsp;<span>✦</span>
+  <span>&#10022;</span>&nbsp; All prices exclusive of taxes &nbsp;<span>&#10022;</span>
 </footer>
 
-<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
 <script>
-  /* ── PARTICLE CANVAS ── */
   (function(){
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -416,9 +377,8 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
         p.x += Math.sin(p.phase + p.y * 0.008) * p.drift;
         p.opacity = Math.min(p.maxOpacity, p.opacity + 0.002);
         if(p.y < -10){ particles[i] = createParticle(); }
-
         const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
-        grad.addColorStop(0, `rgba(240,208,128,${p.opacity})`);
+        grad.addColorStop(0, 'rgba(240,208,128,' + p.opacity + ')');
         grad.addColorStop(1, 'rgba(201,168,76,0)');
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
@@ -430,25 +390,23 @@ box-shadow: 0 0 16px rgba(201,168,76,0.15);
     draw();
   })();
 
-  /* ── INTERSECTION OBSERVER – sections & items ── */
-  const sectionObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
+  const sectionObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
       if(e.isIntersecting){
         e.target.classList.add('visible');
         const items = e.target.querySelectorAll('.menu-item');
-        items.forEach((item, i) => {
-          setTimeout(() => item.classList.add('visible'), i * 60);
+        items.forEach(function(item, i){
+          setTimeout(function(){ item.classList.add('visible'); }, i * 60);
         });
         sectionObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.08 });
 
-  document.querySelectorAll('.menu-section').forEach(s => sectionObs.observe(s));
+  document.querySelectorAll('.menu-section').forEach(function(s){ sectionObs.observe(s); });
 
-  /* ── SCROLL TO TOP BUTTON ── */
   const btn = document.getElementById('scrollTop');
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function(){
     btn.classList.toggle('show', window.scrollY > 300);
   });
 </script>
